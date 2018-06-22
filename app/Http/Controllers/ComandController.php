@@ -7,7 +7,7 @@ use App\Http\Resourse\Invoker;
 use App\Http\Resourse\SimpleCommand;
 use App\Http\Resourse\Receiver;
 use App\Http\Resourse\ComplexCommand;
-use GuzzleHttp\Client; 
+ 
 // use GuzzleHttp\ClientInterface;
 // use GuzzleHttp\Exception\RequestException;
 
@@ -16,9 +16,9 @@ class ComandController extends Controller
 {
 	public function index(){
 		$invoker = new Invoker();
-		$invoker->setOnStart(new SimpleCommand("Say Hi!"));
+		#$invoker->setOnStart(new SimpleCommand("Say Hi!"));
 		$receiver = new Receiver();
-		$invoker->setOnFinish(new ComplexCommand($receiver, "Send email", "Save report"));
+		$invoker->setOnFinish(new ComplexCommand($receiver, "posts", "get"));
 		$invoker->doSomethingImportant();
 	}
 
