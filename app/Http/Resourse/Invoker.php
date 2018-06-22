@@ -39,14 +39,14 @@ class Invoker
      */
     public function doSomethingImportant()
     {
-        print("Invoker: Does anybody want something done before I begin?\n");
+        #print("Invoker: Does anybody want something done before I begin?\n");
         if ($this->onStart instanceof CommandPatternInterface) {
             $this->onStart->execute();
         }
 
-        print("Invoker: ...doing something really important...\n");
+        #print("Invoker: ...doing something really important...\n");
 
-        print("Invoker: Does anybody want something done after I finish?\n");
+       # print("Invoker: Does anybody want something done after I finish?\n");
         if ($this->onFinish instanceof CommandPatternInterface) {
             $this->onFinish->execute();
         }

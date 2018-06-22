@@ -2,6 +2,8 @@
 
 namespace App\Http\Resourse;
 
+use GuzzleHttp\Client; 
+
  /**
  * The Receiver classes contain some important business logic. They know how to
  * perform all kinds of operations, associated with carrying out a request. In
@@ -12,13 +14,20 @@ namespace App\Http\Resourse;
  //Это список конечных команд
 class Receiver
 {
-    public function doSomething($a)
-    {
-        print("Receiver: sldjfgbljsdbsdj,fgbsdj,fgbsd,jgbsdfj,sb on (".$a.".)\n");
-    }
+	protected function _response($url, $type){
+		$client = new Client(); 
+		$request = $client->$type('http://jsonplaceholder.typicode.com/'.$url);
+		return $request->getBody()->getContents(); 
+	}
+	public function __call($method, $args) {
+      if(in_array($method, ['create', 'update', 'delete', 'get'])) {
+      		$args[] = $method;
+      		print("You use method ".$method);
+      		print_r("For object ". $args[0]."\n");
+      		print call_user_func_array(array($this, '_response'), $args);  
+      }
+      echo "unknown method " . $method;
+      return false;
+  }
 
-    public function doSomethingElse($b)
-    {
-        print("Receiver: Also working on (".$b.".)\n");
-    }
 }

@@ -36,8 +36,9 @@ class ComplexCommand implements CommandPatternInterface
      */
     public function execute()
     {
-        print("ComplexCommand: Complex stuff should be done by a receiver object.\n");
-        $this->receiver->doSomething($this->a);
-        $this->receiver->doSomethingElse($this->b);
+        $method = $this->b;
+        #print("ComplexCommand: Complex stuff should be done by a receiver object.\n");
+        $this->receiver->$method($this->a);
+        #$this->receiver->doPost($this->b);
     }
 }
